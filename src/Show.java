@@ -1,10 +1,14 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 public class Show {
-    public String title; // название
-    public int duration; // длительность в минутах
-    public Director director; // режиссёр
-    public ArrayList<Actor> listOfActors; // список актёров
+    private String title; // название
+    private int duration; // длительность в минутах
+    private Director director; // режиссёр
+    private ArrayList<Actor> listOfActors; // список актёров
+
+    static Scanner scanner;
 
     public Show(String title, int duration, Director director, ArrayList<Actor> listOfActors) {
         this.title = title;
@@ -35,18 +39,58 @@ public class Show {
     }
 
     public void replaceActor(Actor replacement, String surname) {
-        Actor replaceable = null;
-        int index = -1;
-        for(int i=0; i<listOfActors.size(); i++) {
-            if(listOfActors.get(i).surname.equals(surname)) {
-                replaceable = listOfActors.get(i);
-                index = i;
+        ArrayList<Actor> removeList = new ArrayList<>();
+        for(Actor listOfActor : listOfActors) {
+            if (listOfActor.surname.equals(surname)) {
+                removeList.add(listOfActor);
             }
         }
-        if(index == -1) {
+        if(removeList.isEmpty()) {
             System.out.println("Актер с фамилией '" + surname + "' отсутствует в составе спектакля.");
+        } else if(removeList.size() == 1) {
+            listOfActors.remove(removeList.getFirst());
+            listOfActors.add(replacement);
         } else {
-            listOfActors.set(index, replacement);
+            scanner = new Scanner(System.in);
+            System.out.println("Актеров с фамилией '" + surname + "' в спектакле " + removeList.size() + " человек.");
+            while(true) {
+                printMenuMultipleReplaceActor();
+                String command = scanner.nextLine().trim();
+
+                switch (command) {
+                    case "1":
+                        for(Actor removeActor : removeList) {
+                            listOfActors.remove(removeActor);
+                        }
+                        listOfActors.add(replacement);
+                        return;
+                    case "2":
+                        for(int i = 0; i < removeList.size(); i ++) {
+                            System.out.println((i + 1) + " - " + removeList.get(i));
+                        }
+                        System.out.println("Введите разделяя пробелами номера актеров, которых требуется заменить");
+                        // TODO !!!проверку на правильность введенных данных не делаю сознательно!!!
+                        String manualRemove = scanner.nextLine().trim();
+                        ArrayList<String> manualRemoveArray = new ArrayList<>(
+                                Arrays.asList(manualRemove.split(" ")));
+                        for(String number : manualRemoveArray) {
+                            listOfActors.remove(removeList.get(Integer.parseInt(number) - 1));
+                        }
+                        listOfActors.add(replacement);
+                        return;
+                    case "3":
+                        return;
+                    default:
+                        System.out.println("Такой команды нет.");
+                }
+            }
         }
+    }
+
+    private void printMenuMultipleReplaceActor() {
+        System.out.println("Выберите команду:");
+        System.out.println("1 - замена всех актеров");
+        System.out.println("2 - выбрать актеров для замены");
+        System.out.println("3 - отменить замену");
     }
 }

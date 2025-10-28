@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 public class Actor extends Person {
-    public int height; // рост
+    protected int height; // рост
 
     public Actor(String name, String surname, Gender gender, int height) {
         super(name, surname, gender);

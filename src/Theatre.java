@@ -5,6 +5,8 @@ public class Theatre {
         Actor actor1 = new Actor("Иван", "Иванов", Gender.MALE, 172);
         Actor actor2 = new Actor("Петр", "Петров", Gender.MALE, 169);
         Actor actor3 = new Actor("Ирина", "Сидорова", Gender.FEMALE, 165);
+        Actor actor4 = new Actor("Тимур", "Иванов", Gender.FEMALE, 188);
+        Actor actor5 = new Actor("Геннадий", "Иванов", Gender.FEMALE, 155);
 
         Director director1 = new Director("Николай", "Николаев", Gender.MALE, 21);
         Director director2 = new Director("Наталья", "Савинова", Gender.FEMALE, 17);
@@ -21,6 +23,8 @@ public class Theatre {
         );
         normal1.addActor(actor1);
         normal1.addActor(actor2);
+        normal1.addActor(actor4);
+        normal1.addActor(actor5);
 
         Opera opera1 = new Opera("Карамазовы",
                 90,

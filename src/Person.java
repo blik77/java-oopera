@@ -1,8 +1,8 @@
 
 public class Person {
-    final String name; // имя
-    final String surname; // фамилия
-    final Gender gender; // пол
+    protected String name; // имя
+    protected String surname; // фамилия
+    protected Gender gender; // пол
 
     public Person(String name, String surname, Gender gender) {
         this.name = name;
