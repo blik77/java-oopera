@@ -40,9 +40,9 @@ public class Show {
 
     public void replaceActor(Actor replacement, String surname) {
         ArrayList<Actor> removeList = new ArrayList<>();
-        for(Actor listOfActor : listOfActors) {
-            if (listOfActor.surname.equals(surname)) {
-                removeList.add(listOfActor);
+        for(Actor actor : listOfActors) {
+            if (actor.getSurname().equals(surname)) {
+                removeList.add(actor);
             }
         }
         if(removeList.isEmpty()) {

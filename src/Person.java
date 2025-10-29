@@ -14,4 +14,16 @@ public class Person {
     public String toString() {
         return name + " " + surname + ", " + gender;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
 }
